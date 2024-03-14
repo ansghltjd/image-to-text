@@ -99,3 +99,16 @@ for line in tqdm(captions_doc.split('\n')):
     mapping[image_id].append(caption)
 
 from caption_module import clean
+
+all_captions = []
+for key in mapping:
+    for caption in mapping[key]:
+        all_captions.append(caption)
+
+# 텍스트를 토큰화
+tokenizer = Tokenizer()
+tokenizer.fit_on_texts(all_captions)
+vocab_size = len(tokenizer.word_index) + 1
+print(vocab_size)
+# tokenizer 저장
+pickle.dump(tokenizer, open(os.path.join(WORKING_DIR, 'tokenizer.pkl'), 'wb'))
