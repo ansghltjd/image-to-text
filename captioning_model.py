@@ -50,7 +50,7 @@ for img_name in tqdm(os.listdir(directory)):
     image = load_img(img_path, target_size=(224, 224))
     # 이미지 픽셀을 numpy 배열로 변환
     image = img_to_array(image)
-
+    print(image)
     # 모델에 대한 데이터 재구성
     image = image.reshape((1, image.shape[0], image.shape[1], image.shape[2]))
     
@@ -65,3 +65,13 @@ for img_name in tqdm(os.listdir(directory)):
      # store feature
     features[image_id] = feature
     
+
+# store features in pickle
+pickle.dump(features, open(os.path.join(WORKING_DIR, 'features.pkl'), 'wb'))  #pickle.dump(data, file)
+# 피클에서 특징 로드
+with open(os.path.join(WORKING_DIR, 'features.pkl'), 'rb') as f:  #rb : 이진파일
+    features = pickle.load(f)   #load : 파이썬 객체로 다시 불러옴
+
+with open(os.path.join(BASE_DIR, 'captions.txt'), 'r',encoding="UTF-8") as f:
+    next(f)   # 첫줄 건너뛰고 다음 데이터부터 읽어옴
+    captions_doc = f.read()
