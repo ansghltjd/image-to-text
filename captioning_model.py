@@ -75,3 +75,25 @@ with open(os.path.join(WORKING_DIR, 'features.pkl'), 'rb') as f:  #rb : 이진�
 with open(os.path.join(BASE_DIR, 'captions.txt'), 'r',encoding="UTF-8") as f:
     next(f)   # 첫줄 건너뛰고 다음 데이터부터 읽어옴
     captions_doc = f.read()
+
+# 캡션에 대한 이미지 매핑 생성
+mapping = {}
+# 캡션을 한 줄씩 읽어옴
+for line in tqdm(captions_doc.split('\n')):
+    # 쉼표(,)기준으로 나눕니다.
+    tokens = line.split(',')
+    if len(line) < 2:
+        continue
+    image_id, caption = tokens[0], tokens[1:]
+    
+    # 이미지 ID에서 확장자 제거
+    image_id = image_id.split('.')[0]
+    
+    # 캡션 목록을 문자열로 변환
+    caption = " ".join(caption)
+    
+    # 필요한 경우 목록 생성
+    if image_id not in mapping:
+        mapping[image_id] = []
+    # 캡션 저장
+    mapping[image_id].append(caption)
