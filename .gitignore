@@ -127,7 +127,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
-
+kaggle/
 # Spyder project settings
 .spyderproject
 .spyproject
