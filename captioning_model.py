@@ -64,7 +64,7 @@ for img_name in tqdm(os.listdir(directory)):
     image_id = img_name.split('.')[0]
      # store feature
     features[image_id] = feature
-    
+    break
 
 # store features in pickle
 pickle.dump(features, open(os.path.join(WORKING_DIR, 'features.pkl'), 'wb'))  #pickle.dump(data, file)
@@ -98,3 +98,4 @@ for line in tqdm(captions_doc.split('\n')):
     # 캡션 저장
     mapping[image_id].append(caption)
 
+from caption_module import clean
