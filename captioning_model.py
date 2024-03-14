@@ -97,3 +97,4 @@ for line in tqdm(captions_doc.split('\n')):
         mapping[image_id] = []
     # 캡션 저장
     mapping[image_id].append(caption)
+
