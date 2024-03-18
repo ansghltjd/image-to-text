@@ -17,4 +17,6 @@
 <br>
 
 
+## 전체적인 모델 구조
 
+<img src="./img/img.png">
