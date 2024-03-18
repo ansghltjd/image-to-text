@@ -4,8 +4,34 @@ from keras.utils import to_categorical
 import numpy as np
 import os
 import pickle
+from keras.models import load_model
+from pickle import load
+from keras.applications.vgg16 import VGG16, preprocess_input
+from keras.utils import load_img, img_to_array
+from keras import Model
 WORKING_DIR = './kaggle/working'
 BASE_DIR = './kaggle/input/flickr30k/'
+
+# 특징 추출
+def extract_features(filename):
+    # vgg16 모델 로드
+    model = VGG16()
+    # 모델을 재구성
+    model = Model(inputs=model.inputs, outputs=model.layers[-2].output)
+    image = load_img(filename, target_size=(224, 224))
+    # 이미지 픽셀을 numpy 배열로 변환
+    image = img_to_array(image)
+    
+    # 모델에 대한 데이터 재구성
+    image = image.reshape((1, image.shape[0], image.shape[1], image.shape[2]))
+    
+     # vgg를 위한 전처리 이미지
+    image = preprocess_input(image)
+    
+     # 특징 추출
+    feature = model.predict(image, verbose=0)
+    return feature
+
 #텍스트 전처리
 def clean(mapping):
     for key, captions in mapping.items():

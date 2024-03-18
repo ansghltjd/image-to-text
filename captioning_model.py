@@ -46,7 +46,6 @@ BASE_DIR = './kaggle/input/flickr30k/'
 WORKING_DIR = './kaggle/working'
 
 
-
 # vgg16 모델 로드
 model = VGG16()
 # 모델을 재구성
