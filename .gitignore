@@ -128,7 +128,7 @@ ENV/
 env.bak/
 venv.bak/
 kaggle/
-./img
+
 # Spyder project settings
 .spyderproject
 .spyproject
